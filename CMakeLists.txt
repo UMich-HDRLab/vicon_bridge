@@ -10,11 +10,14 @@ find_package(catkin REQUIRED COMPONENTS
     roscpp
     tf
     diagnostic_updater
+    std_msgs
 )
 
 find_package(Boost REQUIRED COMPONENTS thread date_time)
 
 # Generate messages and services
+add_message_files(DIRECTORY msg)
+
 add_message_files(FILES
     Marker.msg
     Markers.msg
@@ -26,7 +29,7 @@ add_service_files(FILES
     viconGrabPose.srv
 )
 
-generate_messages(DEPENDENCIES geometry_msgs)
+generate_messages(DEPENDENCIES geometry_msgs std_msgs)
 
 # Generate dynamic parameters
 generate_dynamic_reconfigure_options(
@@ -37,7 +40,8 @@ catkin_package(CATKIN_DEPENDS
     dynamic_reconfigure
     geometry_msgs
     message_runtime 
-    roscpp 
+    roscpp
+    std_msgs 
 )
 
 include_directories(
